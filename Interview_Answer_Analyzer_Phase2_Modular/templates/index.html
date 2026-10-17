@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interview Answer Analyzer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">IA</div>
+    <div><h1>Interview Answer Analyzer</h1><p>Practice with purpose. Improve one answer at a time.</p></div>
+    <span class="status"><i></i> RULE-BASED ANALYSIS</span>
+  </header>
+
+  <main class="layout">
+    <section class="panel editor-panel">
+      <div class="section-heading"><div><span class="eyebrow">PRACTICE STUDIO</span><h2>Analyze your answer</h2></div><span class="step">01 / 03</span></div>
+      <form id="answer-form">
+        <label for="question">Interview question</label>
+        <textarea id="question" rows="3" placeholder="e.g. Tell me about a challenge you solved." required></textarea>
+        <div class="label-row"><label for="answer">Your answer</label><span id="word-count">0 words</span></div>
+        <textarea id="answer" rows="8" placeholder="Write your answer here. Include what you did and the result..." required></textarea>
+        <div class="form-actions"><button class="primary-btn" type="submit">Analyze answer <span>↗</span></button><button class="text-btn" id="reset-btn" type="button">Clear fields</button></div>
+        <p class="hint">Your answer is checked using simple rules for length, relevance, action words, and basic writing structure.</p>
+      </form>
+    </section>
+
+    <section class="panel result-panel">
+      <div class="section-heading"><div><span class="eyebrow">YOUR FEEDBACK</span><h2>Analysis result</h2></div><span class="result-icon">✦</span></div>
+      <div id="empty-state" class="empty-state"><div class="empty-graphic">✎</div><h3>Your results will appear here</h3><p>Submit an answer to get a score and practical suggestions.</p></div>
+      <div id="result-content" class="hidden">
+        <div class="score-wrap"><div class="score-circle"><strong id="score-value">0</strong><span>/ 100</span></div><div><span class="eyebrow">OVERALL SCORE</span><h3 id="score-label">Keep practising</h3><p id="score-summary">Feedback based on the answer you submitted.</p></div></div>
+        <div class="metric-row"><div class="metric"><span>Word count</span><strong id="result-words">0</strong></div><div class="metric"><span>Review points</span><strong id="feedback-count">0</strong></div></div>
+        <h3 class="subheading">Suggestions to improve</h3><ul id="feedback-list" class="feedback-list"></ul>
+      </div>
+    </section>
+
+    <section class="panel history-panel">
+      <div class="section-heading"><div><span class="eyebrow">RECENT ATTEMPTS</span><h2>Answer history</h2></div><button id="refresh-btn" class="small-btn" type="button">Refresh ↻</button></div>
+      <div id="history-list" class="history-list"><p class="muted">Loading your recent attempts...</p></div>
+      <div class="history-actions"><p>Undo removes the latest saved analysis (Stack / LIFO behaviour).</p><div><button id="undo-btn" class="secondary-btn" type="button">Undo latest</button><button id="clear-history-btn" class="danger-btn" type="button">Clear history</button></div></div>
+    </section>
+
+    <section class="panel booking-panel">
+      <div class="section-heading"><div><span class="eyebrow">LIVE MOCK INTERVIEW</span><h2>Book a professor interview</h2></div><span class="result-icon">◷</span></div>
+      <p class="hint booking-intro">Choose a professor and a future time. Your request starts as Pending. The meeting link uses Jitsi Meet for this project demo.</p>
+      <form id="booking-form" class="booking-form">
+        <div class="booking-grid">
+          <div><label for="student-name">Your name</label><input id="student-name" required maxlength="80" placeholder="Enter your name"></div>
+          <div><label for="student-email">Your email</label><input id="student-email" type="email" required maxlength="120" placeholder="you@example.com"></div>
+          <div><label for="professor-select">Choose professor</label><select id="professor-select" required><option value="">Loading professors...</option></select></div>
+          <div><label for="interview-date">Date</label><input id="interview-date" type="date" required></div>
+          <div><label for="interview-time">Time</label><input id="interview-time" type="time" required></div>
+          <div class="booking-full"><label for="interview-purpose">Interview purpose</label><textarea id="interview-purpose" rows="3" required maxlength="500" placeholder="e.g. Practice for a software internship interview"></textarea></div>
+        </div>
+        <button class="primary-btn" type="submit">Request interview <span>↗</span></button>
+      </form>
+      <div id="booking-message" class="booking-message" role="status"></div>
+      <div class="booking-divider"></div>
+      <div class="section-heading"><div><span class="eyebrow">SCHEDULE</span><h2>Interview appointments</h2></div><button id="refresh-appointments" class="small-btn" type="button">Refresh ↻</button></div>
+      <p class="hint">For this student-project demo, the buttons below simulate professor actions. A real deployment should add login and role permissions.</p>
+      <div id="appointments-list" class="appointments-list"><p class="muted">Loading appointments...</p></div>
+    </section>
+  </main>
+  <footer>Student project · Rule-based feedback is a practice aid, not a professional assessment.</footer>
+  <div id="toast" role="status" class="toast"></div>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
